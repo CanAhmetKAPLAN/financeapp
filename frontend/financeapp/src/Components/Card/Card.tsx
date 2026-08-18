@@ -1,19 +1,23 @@
-import React, { type JSX } from 'react'
+import React, { type JSX, type SyntheticEvent } from 'react'
 import './Card.css'
+import type { CompanySearch } from '../../company';
+import AddPortfolio from '../Portfolio/AddPortfolio';
 
 interface Props {
-  companyName: string
-  ticker: string
-  price: number
+  id: string;
+  companies: CompanySearch
+  onPortfolioCreate: (e: SyntheticEvent, symbol: string) => void
 }
-const Card: React.FC<Props> = ({ companyName, ticker, price }: Props): JSX.Element => {
+const Card: React.FC<Props> = ({ id, companies, onPortfolioCreate }: Props): JSX.Element => {
   return (
-    <div className='card'>
-      <img src="https://thumbs.dreamstime.com/z/finance-business-concept-invesment-graph-coins-rows-investment-growth-table-blue-color-tone-111488763.jpg?ct=jpeg" alt={companyName} />
+    <div className='card' id={id}>
+      <img src="https://thumbs.dreamstime.com/z/finance-business-concept-invesment-graph-coins-rows-investment-growth-table-blue-color-tone-111488763.jpg?ct=jpeg" alt={companies.name} />
       <div className='details'>
-        <h2>{ticker}</h2>
-        <p>${price}</p>
-        <p className='info'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, ea!</p>
+        <h2>{companies.name}</h2>
+        <h2>{companies.symbol}</h2>
+        <p>${companies.currency}</p>
+        <p className='info'>{companies.exchangeShortName} - {companies.stockExchange}</p>
+        <AddPortfolio onPortfolioCreate={(e) => onPortfolioCreate(e, companies.symbol)} symbol={companies.symbol} />
       </div>
     </div>
   )
