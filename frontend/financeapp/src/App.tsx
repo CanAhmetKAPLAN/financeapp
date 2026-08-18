@@ -1,17 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useState, type ChangeEvent, type SyntheticEvent } from 'react'
 import './App.css'
-import Card from './Components/Card/Card'
 import CardList from './Components/CardList/CardList'
 import Search from './Components/Search/Search'
+import { searchCompanies } from './Components/api'
+import type { CompanySearch } from './company'
 
 function App() {
+  const [search, setSearch] = useState('')
+  const [searchResult, setSearchResult] = useState<CompanySearch[]>([])
+  const [serverError, setServerError] = useState<string>('')
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value)
+  }
+  const onClick = async (e: SyntheticEvent) => {
+    e.preventDefault()
+    try {
+      const result = await searchCompanies(search)
+      setSearchResult(result)
+      setServerError('')
+    } catch (error) {
+      setServerError(error instanceof Error ? error.message : 'Bilinmeyen bir hata oluştu')
+    }
+  }
   return (
     <>
-      <Search />
-      <CardList />
+      <Search onClick={onClick} search={search} handleChange={handleChange} />
+      {serverError && <p className='error'>{serverError}</p>}
+      <CardList companies={searchResult} />
     </>
   )
 }
