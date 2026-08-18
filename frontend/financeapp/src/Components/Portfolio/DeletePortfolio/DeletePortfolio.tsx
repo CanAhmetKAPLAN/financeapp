@@ -1,7 +1,7 @@
-import React, { type SyntheticEvent } from 'react'
+import { type SyntheticEvent } from 'react'
 
 interface Props {
-    portfolioValues: string[];
+    portfolioValues: string;
     onPortFolioDelete: (e: SyntheticEvent) => void;
 }
 
@@ -9,11 +9,13 @@ interface Props {
 const DeletePortfolio = ({ onPortFolioDelete, portfolioValues }: Props) => {
     return (
         <div>
-            <form onSubmit={onPortFolioDelete} >
+            <form onSubmit={onPortFolioDelete}>
                 <input hidden={true} value={portfolioValues} />
-                <button>X</button>
+                <button className="block w-full py-3 text-white duration-200 border-2 rounded-lg bg-red-500 hover:text-red-500 hover:bg-white border-red-500">
+                    X
+                </button>
             </form>
-        </div >
+        </div>
     )
 }
 

@@ -5,6 +5,8 @@ import Search from './Components/Search/Search'
 import { searchCompanies } from './Components/api'
 import type { CompanySearch } from './company'
 import ListPortfolio from './Components/Portfolio/ListPortfolio/ListPortfolio'
+import Navbar from './Components/Navbar/Navbar'
+import Hero from './Components/Hero/Hero'
 
 function App() {
   const [search, setSearch] = useState('')
@@ -39,10 +41,12 @@ function App() {
   }
   return (
     <>
+      <Navbar />
+      <Hero />
       <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
-      {serverError && <p className='error'>{serverError}</p>}
+      {serverError && <h1>{serverError}</h1>}
       {portfolioValues.length > 0 && <p>Portföy: {portfolioValues.join(', ')}</p>}
-      <ListPortfolio portfolioValues={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
+      <ListPortfolio portfolioValues={portfolioValues} onPortFolioDelete={onPortfolioDelete} />
       <CardList companies={searchResult} onPortfolioCreate={onPortfolioCreate} />
     </>
   )

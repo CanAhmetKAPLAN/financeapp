@@ -17,11 +17,13 @@ const defaultCompanies: CompanySearch[] = [
 const CardList: React.FC<Props> = ({ companies, onPortfolioCreate }: Props): JSX.Element => {
     const list = companies.length > 0 ? companies : defaultCompanies
     return (
-        <div>
-            {list.map((company) => (
+        <>
+            {companies.length > 0 ? (list.map((company) => (
                 <Card key={company.symbol} id={uuidv4()} companies={company} onPortfolioCreate={onPortfolioCreate} />
-            ))}
-        </div>
+            ))) : (<p className="mb-3 mt-3 text-xl font-semibold text-center md:text-xl">
+                Sonuc Yok!
+            </p>)}
+        </>
     )
 }
 
