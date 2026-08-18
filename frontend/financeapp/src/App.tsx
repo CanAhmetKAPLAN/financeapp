@@ -17,8 +17,15 @@ function App() {
   }
   const onPortfolioCreate = (e: any) => {
     e.preventDefault()
+    const exist = portfolioValues.includes(e.target[0].value);
+    if (exist) return;
     const updatedPortfolio = [...portfolioValues, e.target[0].value];
     setPortfolioValue(updatedPortfolio);
+  }
+  const onPortfolioDelete = (e: any) => {
+    e.preventDefault()
+    const removed = portfolioValues.filter(item => item !== e.target[0].value);
+    setPortfolioValue(removed);
   }
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
@@ -35,7 +42,7 @@ function App() {
       <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
       {serverError && <p className='error'>{serverError}</p>}
       {portfolioValues.length > 0 && <p>Portföy: {portfolioValues.join(', ')}</p>}
-      <ListPortfolio portfolioValues={portfolioValues} />
+      <ListPortfolio portfolioValues={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
       <CardList companies={searchResult} onPortfolioCreate={onPortfolioCreate} />
     </>
   )
