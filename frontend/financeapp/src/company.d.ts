@@ -9,32 +9,33 @@ export interface CompanySearch {
 export interface CompanyProfile {
     symbol: string;
     price: number;
+    marketCap: number;
     beta: number;
-    volAvg: number;
-    mktCap: number;
-    lastDiv: number;
+    lastDividend: number;
     range: string;
-    changes: number;
+    change: number;
+    changePercentage: number;
+    volume: number;
+    averageVolume: number;
     companyName: string;
     currency: string;
     cik: string;
     isin: string;
+    cusip: string;
+    exchangeFullName: string;
     exchange: string;
-    exchangeShortName: string;
     industry: string;
     website: string;
     description: string;
     ceo: string;
     sector: string;
-    counter: string;
+    country: string;
     fullTimeEmployees: string;
     phone: string;
     address: string;
     city: string;
     state: string;
     zip: string;
-    dcfDiff: number;
-    dcf: number;
     image: string;
     ipoDate: string;
     defaultImage: boolean;
@@ -42,6 +43,9 @@ export interface CompanyProfile {
     isActivelyTrading: boolean;
     isAdr: boolean;
     isFund: boolean;
+
+    // merged in from /stable/discounted-cash-flow
+    dcf: number;
 }
 
 export interface CompanyKeyRatios {
@@ -223,9 +227,9 @@ export interface CompanyCashFlow {
     symbol: string;
     reportedCurrency: string;
     cik: string;
-    fillingDate: string;
+    filingDate: string;
     acceptedDate: string;
-    calendarYear: string;
+    fiscalYear: string;
     period: string;
     netIncome: number;
     depreciationAndAmortization: number;
@@ -242,14 +246,21 @@ export interface CompanyCashFlow {
     acquisitionsNet: number;
     purchasesOfInvestments: number;
     salesMaturitiesOfInvestments: number;
-    otherInvestingActivites: number;
-    netCashUsedForInvestingActivites: number;
-    debtRepayment: number;
-    commonStockIssued: number;
+    otherInvestingActivities: number;
+    netCashProvidedByInvestingActivities: number;
+    netDebtIssuance: number;
+    longTermNetDebtIssuance: number;
+    shortTermNetDebtIssuance: number;
+    netStockIssuance: number;
+    netCommonStockIssuance: number;
+    commonStockIssuance: number;
     commonStockRepurchased: number;
-    dividendsPaid: number;
-    otherFinancingActivites: number;
-    netCashUsedProvidedByFinancingActivities: number;
+    netPreferredStockIssuance: number;
+    netDividendsPaid: number;
+    commonDividendsPaid: number;
+    preferredDividendsPaid: number;
+    otherFinancingActivities: number;
+    netCashProvidedByFinancingActivities: number;
     effectOfForexChangesOnCash: number;
     netChangeInCash: number;
     cashAtEndOfPeriod: number;
@@ -257,8 +268,8 @@ export interface CompanyCashFlow {
     operatingCashFlow: number;
     capitalExpenditure: number;
     freeCashFlow: number;
-    link: string;
-    finalLink: string;
+    incomeTaxesPaid: number;
+    interestPaid: number;
 }
 
 export interface CompanyHistoricalDividend {
