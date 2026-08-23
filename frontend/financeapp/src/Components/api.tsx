@@ -1,5 +1,5 @@
 import axios from "axios"
-import type { CompanySearch, CompanyProfile, CompanyKeyMetrics, CompanyIncomeStatement, CompanyBalanceSheet, CompanyCashFlow } from "../company";
+import type { CompanySearch, CompanyProfile, CompanyKeyMetrics, CompanyIncomeStatement, CompanyBalanceSheet, CompanyCashFlow, CompanyCompData } from "../company";
 
 const API_KEY = import.meta.env.VITE_FMP_API_KEY;
 
@@ -65,10 +65,10 @@ export const getIncomeStatement = async (symbol: string): Promise<CompanyIncomeS
     try {
         const [{ data: incomeStatements }, { data: ratios }] = await Promise.all([
             axios.get<Partial<CompanyIncomeStatement>[]>(
-                `https://financialmodelingprep.com/stable/income-statement?symbol=${symbol}&limit=5&apikey=${API_KEY}`
+                `https://financialmodelingprep.com/stable/income-statement?symbol=${symbol}&apikey=${API_KEY}`
             ),
             axios.get<Partial<CompanyIncomeStatement>[]>(
-                `https://financialmodelingprep.com/stable/ratios?symbol=${symbol}&limit=5&apikey=${API_KEY}`
+                `https://financialmodelingprep.com/stable/ratios?symbol=${symbol}&apikey=${API_KEY}`
             ),
         ])
         return incomeStatements.map((statement) => ({
@@ -87,7 +87,7 @@ export const getIncomeStatement = async (symbol: string): Promise<CompanyIncomeS
 export const getBalanceSheet = async (symbol: string): Promise<CompanyBalanceSheet[]> => {
     try {
         const { data } = await axios.get<CompanyBalanceSheet[]>(
-            `https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${symbol}&limit=5&apikey=${API_KEY}`
+            `https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${symbol}&apikey=${API_KEY}`
         )
         return data;
     } catch (error) {
@@ -102,7 +102,22 @@ export const getBalanceSheet = async (symbol: string): Promise<CompanyBalanceShe
 export const getCashflowStatement = async (symbol: string): Promise<CompanyCashFlow[]> => {
     try {
         const { data } = await axios.get<CompanyCashFlow[]>(
-            `https://financialmodelingprep.com/stable/cash-flow-statement?symbol=${symbol}&limit=5&apikey=${API_KEY}`
+            `https://financialmodelingprep.com/stable/cash-flow-statement?symbol=${symbol}&apikey=${API_KEY}`
+        )
+        return data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error("API İsteği Başarısız Oldu:", error.message);
+        } else {
+            console.error("Beklenmeyen bir hata oluştu:", error);
+        }
+        throw error;
+    }
+}
+export const getCompData = async (symbol: string): Promise<CompanyCompData[]> => {
+    try {
+        const { data } = await axios.get<CompanyCompData[]>(
+            `https://financialmodelingprep.com/stable/stock-peers?symbol=${symbol}&apikey=${API_KEY}`
         )
         return data;
     } catch (error) {

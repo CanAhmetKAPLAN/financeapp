@@ -3,6 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { getCashflowStatement } from '../api';
 import { useEffect, useState } from 'react';
 import Table from '../Table/Table';
+import Spinner from '../Spinner/Spinner';
 
 const config = [
     {
@@ -68,7 +69,7 @@ const CashflowStatement = () => {
                 </>
                 :
                 <>
-                    Loading
+                    <Spinner />
                 </>
             }
         </>

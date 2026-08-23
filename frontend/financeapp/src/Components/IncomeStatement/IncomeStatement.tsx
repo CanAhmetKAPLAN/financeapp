@@ -3,6 +3,7 @@ import type { CompanyIncomeStatement } from "../../company";
 import { useEffect, useState } from "react";
 import { getIncomeStatement } from "../api";
 import Table from "../Table/Table";
+import Spinner from "../Spinner/Spinner";
 
 const configs = [
     {
@@ -135,7 +136,7 @@ const IncomeStatement = () => {
                 </>
                 :
                 <>
-                    Loading
+                    <Spinner />
                 </>
             }
         </>
