@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaHome } from 'react-icons/fa'
 const Sidebar = () => {
@@ -26,6 +25,11 @@ const Sidebar = () => {
 
                             <FaHome />
                             <h6 className='ml-3'>Income Statement</h6>
+                        </Link>
+                        <Link to="balance-sheet" className="md:min-w-full text-blueGray-500 text-medium uppercase font-bold block pt-1 pb-4 no-underline">
+
+                            <FaHome />
+                            <h6 className='ml-3'>Balance Sheet</h6>
                         </Link>
 
                     </div>

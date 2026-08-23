@@ -1,5 +1,11 @@
 import Table from '../../Components/Table/Table'
 import Tile from '../../Components/Tile/Tile'
+import { testIncomeStatementData } from '../../Components/Table/testData'
+
+const tableConfig = [
+    { label: "Date", render: (company: any) => company.date },
+    { label: "Revenue", render: (company: any) => company.revenue },
+]
 
 const DesignPage = () => {
     return (
@@ -18,7 +24,7 @@ const DesignPage = () => {
             <div className="border-b pb-8 mb-8">
                 <h3 className="font-bold">Table</h3>
                 <p className="text-gray-500 text-sm mb-4">This is a data table</p>
-                <Table />
+                <Table data={testIncomeStatementData} config={tableConfig} />
             </div>
         </div>
     )

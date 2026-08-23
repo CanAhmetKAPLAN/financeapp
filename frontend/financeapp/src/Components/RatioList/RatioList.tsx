@@ -1,27 +1,19 @@
-import React from 'react'
-import { TestDataCompany } from '../Table/testData'
+type Props = {
+    config: any;
+    data: any;
+}
 
-const data = TestDataCompany[0]
-type Company = typeof data
-const config = [{
-    label: "Company Name",
-    render: (company: Company) => company.companyName,
-    subTitle: "This is the company name",
+const RatioList = ({ config, data }: Props) => {
 
-},
-]
-
-const RatioList = () => {
-
-    const renderedRow = config.map(row => {
+    const renderedRow = config.map((row: any, index: number) => {
         return (
-            <li className='py-3 sm:py-4'>
+            <li key={index} className='py-3 sm:py-4'>
                 <div className='flex items-center space-x-4'>
                     <div className='flex-1 min-w-0'>
-                        <p className='text-sm fonmt-medium text-gray-900 truncate'>
+                        <div className='text-sm fonmt-medium text-gray-900 truncate'>
                             {row.label}
-                        </p>
-                        <p className='text-sm text-gray-500 truncate'>{row.subTitle && row.subTitle}</p>
+                        </div>
+                        <p className='text-sm text-gray-500 truncate'>{row.subTitle}</p>
                     </div>
                     <div className='.inline-flex.items-center.text-base.font-semibold.text-gray-900'>{row.render(data)}</div>
                 </div>
@@ -30,7 +22,7 @@ const RatioList = () => {
     })
 
     return (
-        <div className='bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full'>
+        <div className='bg-white shadow rounded-lg ml-4 mt-4 mb-4 p-4 sm:p-6 h-full'>
             <ul className='divide-y divided-gray-200'>{renderedRow}</ul>
         </div>
     )
