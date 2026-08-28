@@ -9,33 +9,32 @@ export interface CompanySearch {
 export interface CompanyProfile {
     symbol: string;
     price: number;
-    marketCap: number;
     beta: number;
-    lastDividend: number;
+    volAvg: number;
+    mktCap: number;
+    lastDiv: number;
     range: string;
-    change: number;
-    changePercentage: number;
-    volume: number;
-    averageVolume: number;
+    changes: number;
     companyName: string;
     currency: string;
     cik: string;
     isin: string;
-    cusip: string;
-    exchangeFullName: string;
     exchange: string;
+    exchangeShortName: string;
     industry: string;
     website: string;
     description: string;
     ceo: string;
     sector: string;
-    country: string;
+    counter: string;
     fullTimeEmployees: string;
     phone: string;
     address: string;
     city: string;
     state: string;
     zip: string;
+    dcfDiff: number;
+    dcf: number;
     image: string;
     ipoDate: string;
     defaultImage: boolean;
@@ -43,9 +42,6 @@ export interface CompanyProfile {
     isActivelyTrading: boolean;
     isAdr: boolean;
     isFund: boolean;
-
-    // merged in from /stable/discounted-cash-flow
-    dcf: number;
 }
 
 export interface CompanyKeyRatios {
@@ -114,13 +110,14 @@ export interface CompanyIncomeStatement {
     symbol: string;
     reportedCurrency: string;
     cik: string;
-    filingDate: string;
+    fillingDate: string;
     acceptedDate: string;
-    fiscalYear: string;
+    calendarYear: string;
     period: string;
     revenue: number;
     costOfRevenue: number;
     grossProfit: number;
+    grossProfitRatio: number;
     researchAndDevelopmentExpenses: number;
     generalAndAdministrativeExpenses: number;
     sellingAndMarketingExpenses: number;
@@ -128,34 +125,25 @@ export interface CompanyIncomeStatement {
     otherExpenses: number;
     operatingExpenses: number;
     costAndExpenses: number;
-    netInterestIncome: number;
     interestIncome: number;
     interestExpense: number;
     depreciationAndAmortization: number;
     ebitda: number;
-    ebit: number;
-    nonOperatingIncomeExcludingInterest: number;
+    ebitdaratio: number;
     operatingIncome: number;
+    operatingIncomeRatio: number;
     totalOtherIncomeExpensesNet: number;
     incomeBeforeTax: number;
+    incomeBeforeTaxRatio: number;
     incomeTaxExpense: number;
-    netIncomeFromContinuingOperations: number;
-    netIncomeFromDiscontinuedOperations: number;
-    otherAdjustmentsToNetIncome: number;
     netIncome: number;
-    netIncomeDeductions: number;
-    bottomLineNetIncome: number;
+    netIncomeRatio: number;
     eps: number;
-    epsDiluted: number;
+    epsdiluted: number;
     weightedAverageShsOut: number;
     weightedAverageShsOutDil: number;
-
-    // merged in from /stable/ratios, matched by date (income-statement itself
-    // no longer returns per-period ratio fields on the new "stable" API)
-    grossProfitMargin: number;
-    operatingProfitMargin: number;
-    netProfitMargin: number;
-    pretaxProfitMargin: number;
+    link: string;
+    finalLink: string;
 }
 
 export interface CompanyBalanceSheet {
@@ -163,18 +151,15 @@ export interface CompanyBalanceSheet {
     symbol: string;
     reportedCurrency: string;
     cik: string;
-    filingDate: string;
+    fillingDate: string;
     acceptedDate: string;
-    fiscalYear: string;
+    calendarYear: string;
     period: string;
     cashAndCashEquivalents: number;
     shortTermInvestments: number;
     cashAndShortTermInvestments: number;
     netReceivables: number;
-    accountsReceivables: number;
-    otherReceivables: number;
     inventory: number;
-    prepaids: number;
     otherCurrentAssets: number;
     totalCurrentAssets: number;
     propertyPlantEquipmentNet: number;
@@ -187,18 +172,13 @@ export interface CompanyBalanceSheet {
     totalNonCurrentAssets: number;
     otherAssets: number;
     totalAssets: number;
-    totalPayables: number;
     accountPayables: number;
-    otherPayables: number;
-    accruedExpenses: number;
     shortTermDebt: number;
-    capitalLeaseObligationsCurrent: number;
     taxPayables: number;
     deferredRevenue: number;
     otherCurrentLiabilities: number;
     totalCurrentLiabilities: number;
     longTermDebt: number;
-    capitalLeaseObligationsNonCurrent: number;
     deferredRevenueNonCurrent: number;
     deferredTaxLiabilitiesNonCurrent: number;
     otherNonCurrentLiabilities: number;
@@ -206,20 +186,21 @@ export interface CompanyBalanceSheet {
     otherLiabilities: number;
     capitalLeaseObligations: number;
     totalLiabilities: number;
-    treasuryStock: number;
     preferredStock: number;
     commonStock: number;
     retainedEarnings: number;
-    additionalPaidInCapital: number;
     accumulatedOtherComprehensiveIncomeLoss: number;
-    otherTotalStockholdersEquity: number;
+    othertotalStockholdersEquity: number;
     totalStockholdersEquity: number;
     totalEquity: number;
+    totalLiabilitiesAndStockholdersEquity: number;
     minorityInterest: number;
     totalLiabilitiesAndTotalEquity: number;
     totalInvestments: number;
     totalDebt: number;
     netDebt: number;
+    link: string;
+    finalLink: string;
 }
 
 export interface CompanyCashFlow {
@@ -227,9 +208,9 @@ export interface CompanyCashFlow {
     symbol: string;
     reportedCurrency: string;
     cik: string;
-    filingDate: string;
+    fillingDate: string;
     acceptedDate: string;
-    fiscalYear: string;
+    calendarYear: string;
     period: string;
     netIncome: number;
     depreciationAndAmortization: number;
@@ -246,21 +227,14 @@ export interface CompanyCashFlow {
     acquisitionsNet: number;
     purchasesOfInvestments: number;
     salesMaturitiesOfInvestments: number;
-    otherInvestingActivities: number;
-    netCashProvidedByInvestingActivities: number;
-    netDebtIssuance: number;
-    longTermNetDebtIssuance: number;
-    shortTermNetDebtIssuance: number;
-    netStockIssuance: number;
-    netCommonStockIssuance: number;
-    commonStockIssuance: number;
+    otherInvestingActivites: number;
+    netCashUsedForInvestingActivites: number;
+    debtRepayment: number;
+    commonStockIssued: number;
     commonStockRepurchased: number;
-    netPreferredStockIssuance: number;
-    netDividendsPaid: number;
-    commonDividendsPaid: number;
-    preferredDividendsPaid: number;
-    otherFinancingActivities: number;
-    netCashProvidedByFinancingActivities: number;
+    dividendsPaid: number;
+    otherFinancingActivites: number;
+    netCashUsedProvidedByFinancingActivities: number;
     effectOfForexChangesOnCash: number;
     netChangeInCash: number;
     cashAtEndOfPeriod: number;
@@ -268,8 +242,71 @@ export interface CompanyCashFlow {
     operatingCashFlow: number;
     capitalExpenditure: number;
     freeCashFlow: number;
-    incomeTaxesPaid: number;
-    interestPaid: number;
+    link: string;
+    finalLink: string;
+}
+
+export interface CompanyKeyMetrics {
+    revenuePerShareTTM: number;
+    netIncomePerShareTTM: number;
+    operatingCashFlowPerShareTTM: number;
+    freeCashFlowPerShareTTM: number;
+    cashPerShareTTM: number;
+    bookValuePerShareTTM: number;
+    tangibleBookValuePerShareTTM: number;
+    shareholdersEquityPerShareTTM: number;
+    interestDebtPerShareTTM: number;
+    marketCapTTM: number;
+    enterpriseValueTTM: number;
+    peRatioTTM: number;
+    priceToSalesRatioTTM: number;
+    pocfratioTTM: number;
+    pfcfRatioTTM: number;
+    pbRatioTTM: number;
+    ptbRatioTTM: number;
+    evToSalesTTM: number;
+    enterpriseValueOverEBITDATTM: number;
+    evToOperatingCashFlowTTM: number;
+    evToFreeCashFlowTTM: number;
+    earningsYieldTTM: number;
+    freeCashFlowYieldTTM: number;
+    debtToEquityTTM: number;
+    debtToAssetsTTM: number;
+    netDebtToEBITDATTM: number;
+    currentRatioTTM: number;
+    interestCoverageTTM: number;
+    incomeQualityTTM: number;
+    dividendYieldTTM: number;
+    dividendYieldPercentageTTM: number;
+    payoutRatioTTM: number;
+    salesGeneralAndAdministrativeToRevenueTTM: number;
+    researchAndDevelopementToRevenueTTM: number;
+    intangiblesToTotalAssetsTTM: number;
+    capexToOperatingCashFlowTTM: number;
+    capexToRevenueTTM: number;
+    capexToDepreciationTTM: number;
+    stockBasedCompensationToRevenueTTM: number;
+    grahamNumberTTM: number;
+    roicTTM: number;
+    returnOnTangibleAssetsTTM: number;
+    grahamNetNetTTM: number;
+    workingCapitalTTM: number;
+    tangibleAssetValueTTM: number;
+    netCurrentAssetValueTTM: number;
+    investedCapitalTTM: number;
+    averageReceivablesTTM: number;
+    averagePayablesTTM: number;
+    averageInventoryTTM: number;
+    daysSalesOutstandingTTM: number;
+    daysPayablesOutstandingTTM: number;
+    daysOfInventoryOnHandTTM: number;
+    receivablesTurnoverTTM: number;
+    payablesTurnoverTTM: number;
+    inventoryTurnoverTTM: number;
+    roeTTM: number;
+    capexPerShareTTM: number;
+    dividendPerShareTTM: number;
+    debtToMarketCapTTM: number;
 }
 
 export interface CompanyHistoricalDividend {
@@ -289,130 +326,7 @@ export interface Dividend {
 
 export interface CompanyCompData {
     symbol: string;
-    companyName: string;
-    price: number;
-    mktCap: number;
-}
-
-export interface CompanyTenK {
-    symbol: string;
-    fillingDate: string;
-    acceptedDate: string;
-    cik: string;
-    type: string;
-    link: string;
-    finalLink: string;
-}
-
-// Merged shape of FMP's /stable/key-metrics-ttm and /stable/ratios-ttm responses
-// (the old unified /api/v3/key-metrics-ttm endpoint this used to match is deprecated).
-export interface CompanyKeyMetrics {
-    symbol: string;
-
-    // from /stable/key-metrics-ttm
-    marketCap: number;
-    enterpriseValueTTM: number;
-    evToSalesTTM: number;
-    evToOperatingCashFlowTTM: number;
-    evToFreeCashFlowTTM: number;
-    evToEBITDATTM: number;
-    netDebtToEBITDATTM: number;
-    currentRatioTTM: number;
-    incomeQualityTTM: number;
-    grahamNumberTTM: number;
-    grahamNetNetTTM: number;
-    taxBurdenTTM: number;
-    interestBurdenTTM: number;
-    workingCapitalTTM: number;
-    investedCapitalTTM: number;
-    returnOnAssetsTTM: number;
-    operatingReturnOnAssetsTTM: number;
-    returnOnTangibleAssetsTTM: number;
-    returnOnEquityTTM: number;
-    returnOnInvestedCapitalTTM: number;
-    returnOnCapitalEmployedTTM: number;
-    earningsYieldTTM: number;
-    freeCashFlowYieldTTM: number;
-    capexToOperatingCashFlowTTM: number;
-    capexToDepreciationTTM: number;
-    capexToRevenueTTM: number;
-    salesGeneralAndAdministrativeToRevenueTTM: number;
-    researchAndDevelopementToRevenueTTM: number;
-    stockBasedCompensationToRevenueTTM: number;
-    intangiblesToTotalAssetsTTM: number;
-    averageReceivablesTTM: number;
-    averagePayablesTTM: number;
-    averageInventoryTTM: number;
-    daysOfSalesOutstandingTTM: number;
-    daysOfPayablesOutstandingTTM: number;
-    daysOfInventoryOutstandingTTM: number;
-    operatingCycleTTM: number;
-    cashConversionCycleTTM: number;
-    freeCashFlowToEquityTTM: number;
-    freeCashFlowToFirmTTM: number;
-    tangibleAssetValueTTM: number;
-    netCurrentAssetValueTTM: number;
-
-    // from /stable/ratios-ttm
-    grossProfitMarginTTM: number;
-    ebitMarginTTM: number;
-    ebitdaMarginTTM: number;
-    operatingProfitMarginTTM: number;
-    pretaxProfitMarginTTM: number;
-    continuousOperationsProfitMarginTTM: number;
-    netProfitMarginTTM: number;
-    bottomLineProfitMarginTTM: number;
-    receivablesTurnoverTTM: number;
-    payablesTurnoverTTM: number;
-    inventoryTurnoverTTM: number;
-    fixedAssetTurnoverTTM: number;
-    assetTurnoverTTM: number;
-    quickRatioTTM: number;
-    solvencyRatioTTM: number;
-    cashRatioTTM: number;
-    priceToEarningsRatioTTM: number;
-    priceToEarningsGrowthRatioTTM: number;
-    forwardPriceToEarningsGrowthRatioTTM: number;
-    priceToEarningsDilutedRatioTTM: number;
-    priceToEarningsDilutedGrowthRatioTTM: number;
-    priceToBookRatioTTM: number;
-    priceToSalesRatioTTM: number;
-    priceToFreeCashFlowRatioTTM: number;
-    priceToOperatingCashFlowRatioTTM: number;
-    debtToAssetsRatioTTM: number;
-    debtToEquityRatioTTM: number;
-    debtToCapitalRatioTTM: number;
-    longTermDebtToCapitalRatioTTM: number;
-    financialLeverageRatioTTM: number;
-    workingCapitalTurnoverRatioTTM: number;
-    operatingCashFlowRatioTTM: number;
-    operatingCashFlowSalesRatioTTM: number;
-    freeCashFlowOperatingCashFlowRatioTTM: number;
-    debtServiceCoverageRatioTTM: number;
-    interestCoverageRatioTTM: number;
-    shortTermOperatingCashFlowCoverageRatioTTM: number;
-    operatingCashFlowCoverageRatioTTM: number;
-    capitalExpenditureCoverageRatioTTM: number;
-    dividendPaidAndCapexCoverageRatioTTM: number;
-    dividendPayoutRatioTTM: number;
-    dividendYieldTTM: number;
-    revenuePerShareTTM: number;
-    netIncomePerShareTTM: number;
-    interestDebtPerShareTTM: number;
-    cashPerShareTTM: number;
-    bookValuePerShareTTM: number;
-    tangibleBookValuePerShareTTM: number;
-    shareholdersEquityPerShareTTM: number;
-    operatingCashFlowPerShareTTM: number;
-    capexPerShareTTM: number;
-    freeCashFlowPerShareTTM: number;
-    netIncomePerEBTTTM: number;
-    ebtPerEbitTTM: number;
-    priceToFairValueTTM: number;
-    debtToMarketCapTTM: number;
-    effectiveTaxRateTTM: number;
-    enterpriseValueMultipleTTM: number;
-    dividendPerShareTTM: number;
+    peersList: string[];
 }
 
 export interface CompanyTenK {

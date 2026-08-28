@@ -4,62 +4,75 @@ import { useOutletContext } from 'react-router-dom';
 import { getKeyMetrics } from '../api';
 import RatioList from '../RatioList/RatioList';
 import Spinner from '../Spinner/Spinner';
+import { formatLargeNonMonetaryNumber, formatRatio } from '../../Helpers/NumberFormatting';
 
 
 const tableConfig = [
     {
         label: "Market Cap",
+        render: (company: CompanyKeyMetrics) =>
+            formatLargeNonMonetaryNumber(company.marketCapTTM),
         subTitle: "Total value of all a company's shares of stock",
-        render: (company: CompanyKeyMetrics) => company.marketCap,
     },
     {
         label: "Current Ratio",
-        subTitle: "Measures the companies ability to pay short term debt obligations",
-        render: (company: CompanyKeyMetrics) => company.currentRatioTTM,
+        render: (company: CompanyKeyMetrics) =>
+            formatRatio(company.currentRatioTTM),
+        subTitle:
+            "Measures the companies ability to pay short term debt obligations",
     },
     {
         label: "Return On Equity",
-        subTitle: "Return on equity is the measure of a company's net income divided by its shareholder's equity",
-        render: (company: CompanyKeyMetrics) => company.returnOnEquityTTM,
+        render: (company: CompanyKeyMetrics) => formatRatio(company.roeTTM),
+        subTitle:
+            "Return on equity is the measure of a company's net income divided by its shareholder's equity",
     },
     {
         label: "Return On Assets",
-        subTitle: "Return on assets is the measure of how effective a company is using its assets",
-        render: (company: CompanyKeyMetrics) => company.returnOnAssetsTTM,
+        render: (company: CompanyKeyMetrics) =>
+            formatRatio(company.returnOnTangibleAssetsTTM),
+        subTitle:
+            "Return on assets is the measure of how effective a company is using its assets",
     },
     {
         label: "Free Cashflow Per Share",
-        subTitle: "Return on assets is the measure of how effective a company is using its assets",
-        render: (company: CompanyKeyMetrics) => company.freeCashFlowPerShareTTM,
-    },
-    {
-        label: "Cash Per Share",
-        render: (company: CompanyKeyMetrics) => company.cashPerShareTTM,
+        render: (company: CompanyKeyMetrics) =>
+            formatRatio(company.freeCashFlowPerShareTTM),
+        subTitle:
+            "Return on assets is the measure of how effective a company is using its assets",
     },
     {
         label: "Book Value Per Share TTM",
-        subTitle: "Book value per share indicates a firm's net asset value (total assets - total liabilities) on per share basis",
-        render: (company: CompanyKeyMetrics) => company.bookValuePerShareTTM,
+        render: (company: CompanyKeyMetrics) =>
+            formatRatio(company.bookValuePerShareTTM),
+        subTitle:
+            "Book value per share indicates a firm's net asset value (total assets - total liabilities) on per share basis",
     },
     {
-        label: "Dividend Yield TTM",
+        label: "Divdend Yield TTM",
+        render: (company: CompanyKeyMetrics) =>
+            formatRatio(company.dividendYieldTTM),
         subTitle: "Shows how much a company pays each year relative to stock price",
-        render: (company: CompanyKeyMetrics) => company.dividendYieldTTM,
     },
     {
         label: "Capex Per Share TTM",
-        subTitle: "Capex is used by a company to aquire, upgrade, and maintain physical assets",
-        render: (company: CompanyKeyMetrics) => company.capexPerShareTTM,
+        render: (company: CompanyKeyMetrics) =>
+            formatRatio(company.capexPerShareTTM),
+        subTitle:
+            "Capex is used by a company to aquire, upgrade, and maintain physical assets",
     },
     {
         label: "Graham Number",
-        subTitle: "This is the upperbound of the price range that a defensive investor should pay for a stock",
-        render: (company: CompanyKeyMetrics) => company.grahamNumberTTM,
+        render: (company: CompanyKeyMetrics) =>
+            formatRatio(company.grahamNumberTTM),
+        subTitle:
+            "This is the upperbouind of the price range that a defensive investor should pay for a stock",
     },
     {
         label: "PE Ratio",
-        subTitle: "This is the upperbound of the price range that a defensive investor should pay for a stock",
-        render: (company: CompanyKeyMetrics) => company.priceToEarningsRatioTTM,
+        render: (company: CompanyKeyMetrics) => formatRatio(company.peRatioTTM),
+        subTitle:
+            "This is the upperbouind of the price range that a defensive investor should pay for a stock",
     },
 ];
 

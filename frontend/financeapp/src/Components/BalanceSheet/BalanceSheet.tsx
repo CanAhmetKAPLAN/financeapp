@@ -32,9 +32,14 @@ const config = [
             formatLargeMonetaryNumber(company.intangibleAssets),
     },
     {
+        label: "Long Term Debt",
+        render: (company: CompanyBalanceSheet) =>
+            formatLargeMonetaryNumber(company.longTermDebt),
+    },
+    {
         label: "Total Debt",
         render: (company: CompanyBalanceSheet) =>
-            formatLargeMonetaryNumber(company.totalDebt),
+            formatLargeMonetaryNumber(company.otherCurrentLiabilities),
     },
     {
         label: <div className="font-bold">Total Liabilites</div>,
@@ -54,7 +59,7 @@ const config = [
     {
         label: "Long-Term Income Taxes",
         render: (company: CompanyBalanceSheet) =>
-            formatLargeMonetaryNumber(company.deferredTaxLiabilitiesNonCurrent),
+            formatLargeMonetaryNumber(company.otherLiabilities),
     },
     {
         label: "Stakeholder's Equity",

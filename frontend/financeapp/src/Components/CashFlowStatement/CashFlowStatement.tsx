@@ -18,13 +18,13 @@ const config = [
     {
         label: "Investing Cashflow",
         render: (company: CompanyCashFlow) =>
-            formatLargeMonetaryNumber(company.netCashProvidedByInvestingActivities),
+            formatLargeMonetaryNumber(company.netCashUsedForInvestingActivites),
     },
     {
         label: "Financing Cashflow",
         render: (company: CompanyCashFlow) =>
             formatLargeMonetaryNumber(
-                company.netCashProvidedByFinancingActivities
+                company.netCashUsedProvidedByFinancingActivities
             ),
     },
     {
@@ -40,7 +40,7 @@ const config = [
     {
         label: "Issuance Of Stock",
         render: (company: CompanyCashFlow) =>
-            formatLargeMonetaryNumber(company.commonStockIssuance),
+            formatLargeMonetaryNumber(company.commonStockIssued),
     },
     {
         label: "Free Cash Flow",

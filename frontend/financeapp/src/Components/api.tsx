@@ -131,10 +131,12 @@ export const getCompData = async (symbol: string): Promise<CompanyCompData[]> =>
 }
 export const getTenK = async (symbol: string): Promise<CompanyTenK[]> => {
     try {
+        const to = new Date().toISOString().slice(0, 10);
+        const from = new Date(Date.now() - 200 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
         const { data } = await axios.get<CompanyTenK[]>(
-            `https://financialmodelingprep.com/stable/sec-filings-search/symbol?symbol=${symbol}&from=2024-01-01&to=2024-03-01&page=0&limit=100&apikey=${API_KEY}`
+            `https://financialmodelingprep.com/stable/sec-filings-search/symbol?symbol=${symbol}&formType=10-K&from=${from}&to=${to}&page=0&limit=20&apikey=${API_KEY}`
         )
-        return data;
+        return data.filter((filing) => filing.formType === "10-K");
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error("API İsteği Başarısız Oldu:", error.message);

@@ -13,8 +13,12 @@ const TenKFinder = ({ ticker }: Props) => {
     const [companyData, setCompanyData] = useState<CompanyTenK[]>();
     useEffect(() => {
         const getData = async () => {
-            const value = await getTenK(ticker);
-            setCompanyData(value)
+            try {
+                const value = await getTenK(ticker);
+                setCompanyData(value)
+            } catch {
+                setCompanyData([])
+            }
         }
         getData()
     }, [ticker])
