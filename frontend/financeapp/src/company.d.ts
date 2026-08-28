@@ -289,7 +289,9 @@ export interface Dividend {
 
 export interface CompanyCompData {
     symbol: string;
-    peersList: string[];
+    companyName: string;
+    price: number;
+    mktCap: number;
 }
 
 export interface CompanyTenK {
@@ -411,4 +413,14 @@ export interface CompanyKeyMetrics {
     effectiveTaxRateTTM: number;
     enterpriseValueMultipleTTM: number;
     dividendPerShareTTM: number;
+}
+
+export interface CompanyTenK {
+    symbol: string;
+    fillingDate: string;
+    acceptedDate: string;
+    cik: string;
+    type: string;
+    link: string;
+    finalLink: string;
 }
