@@ -94,6 +94,7 @@ const CompanyProfile = () => {
                 companyData ? (
                     <>
                         <RatioList config={tableConfig} data={companyData} />
+                        <StockComment stockSymbol={ticker} />
                     </>
                 ) : (
                     <>
