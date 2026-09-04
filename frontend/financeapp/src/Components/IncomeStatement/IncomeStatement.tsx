@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getIncomeStatement } from "../api";
 import Table from "../Table/Table";
 import Spinner from "../Spinner/Spinner";
+import { formatLargeMonetaryNumber, formatRatio } from "../../Helpers/NumberFormatting";
 
 const configs = [
     {
@@ -43,7 +44,7 @@ const configs = [
     {
         label: "Net Income Ratio",
         render: (company: CompanyIncomeStatement) =>
-            formatRatio(company.netIncomeRatio),
+            formatRatio(company.netProfitMargin),
     },
     {
         label: "Earnings Per Share",
@@ -52,22 +53,22 @@ const configs = [
     {
         label: "Earnings Per Diluted",
         render: (company: CompanyIncomeStatement) =>
-            formatRatio(company.epsdiluted),
+            formatRatio(company.epsDiluted),
     },
     {
         label: "Gross Profit Ratio",
         render: (company: CompanyIncomeStatement) =>
-            formatRatio(company.grossProfitRatio),
+            formatRatio(company.grossProfitMargin),
     },
     {
         label: "Opearting Income Ratio",
         render: (company: CompanyIncomeStatement) =>
-            formatRatio(company.operatingIncomeRatio),
+            formatRatio(company.operatingProfitMargin),
     },
     {
         label: "Income Before Taxes Ratio",
         render: (company: CompanyIncomeStatement) =>
-            formatRatio(company.incomeBeforeTaxRatio),
+            formatRatio(company.pretaxProfitMargin),
     },
 ];
 
@@ -99,11 +100,3 @@ const IncomeStatement = () => {
 }
 
 export default IncomeStatement
-
-function formatLargeMonetaryNumber(value: number) {
-    return value;
-}
-
-function formatRatio(value: number) {
-    return value;
-}

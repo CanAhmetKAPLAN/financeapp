@@ -4,6 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import { getBalanceSheet } from '../api';
 import RatioList from '../RatioList/RatioList';
 import Spinner from '../Spinner/Spinner';
+import { formatLargeMonetaryNumber } from '../../Helpers/NumberFormatting';
 
 const config = [
     {
@@ -95,7 +96,4 @@ const BalanceSheet = () => {
 }
 
 export default BalanceSheet
-function formatLargeMonetaryNumber(value: number) {
-    return value;
-}
 

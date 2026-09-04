@@ -12,7 +12,7 @@ const tableConfig = [
     {
         label: "Market Cap",
         render: (company: CompanyKeyMetrics) =>
-            formatLargeNonMonetaryNumber(company.marketCapTTM),
+            formatLargeNonMonetaryNumber(company.marketCap),
         subTitle: "Total value of all a company's shares of stock",
     },
     {
@@ -24,7 +24,7 @@ const tableConfig = [
     },
     {
         label: "Return On Equity",
-        render: (company: CompanyKeyMetrics) => formatRatio(company.roeTTM),
+        render: (company: CompanyKeyMetrics) => formatRatio(company.returnOnEquityTTM),
         subTitle:
             "Return on equity is the measure of a company's net income divided by its shareholder's equity",
     },
@@ -71,7 +71,7 @@ const tableConfig = [
     },
     {
         label: "PE Ratio",
-        render: (company: CompanyKeyMetrics) => formatRatio(company.peRatioTTM),
+        render: (company: CompanyKeyMetrics) => formatRatio(company.priceToEarningsRatioTTM),
         subTitle:
             "This is the upperbouind of the price range that a defensive investor should pay for a stock",
     },

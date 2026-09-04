@@ -4,6 +4,7 @@ import { getCashflowStatement } from '../api';
 import { useEffect, useState } from 'react';
 import Table from '../Table/Table';
 import Spinner from '../Spinner/Spinner';
+import { formatLargeMonetaryNumber } from '../../Helpers/NumberFormatting';
 
 const config = [
     {
@@ -18,13 +19,13 @@ const config = [
     {
         label: "Investing Cashflow",
         render: (company: CompanyCashFlow) =>
-            formatLargeMonetaryNumber(company.netCashUsedForInvestingActivites),
+            formatLargeMonetaryNumber(company.netCashProvidedByInvestingActivities),
     },
     {
         label: "Financing Cashflow",
         render: (company: CompanyCashFlow) =>
             formatLargeMonetaryNumber(
-                company.netCashUsedProvidedByFinancingActivities
+                company.netCashProvidedByFinancingActivities
             ),
     },
     {
@@ -40,7 +41,7 @@ const config = [
     {
         label: "Issuance Of Stock",
         render: (company: CompanyCashFlow) =>
-            formatLargeMonetaryNumber(company.commonStockIssued),
+            formatLargeMonetaryNumber(company.commonStockIssuance),
     },
     {
         label: "Free Cash Flow",
@@ -77,7 +78,3 @@ const CashflowStatement = () => {
 }
 
 export default CashflowStatement
-
-function formatLargeMonetaryNumber(value: number) {
-    return value;
-}
