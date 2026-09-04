@@ -1,4 +1,3 @@
-import React from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from "yup";
 import { useForm } from 'react-hook-form'
@@ -15,7 +14,7 @@ const validation = Yup.object({
 
 type CommentFormInputs = Yup.InferType<typeof validation>;
 
-const StockCommentForm = ({symbol, handleComment}: Props) => {
+const StockCommentForm = ({handleComment}: Props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<CommentFormInputs>({
             resolver: yupResolver(validation)
         });
