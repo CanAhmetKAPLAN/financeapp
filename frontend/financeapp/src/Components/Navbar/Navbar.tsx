@@ -1,16 +1,9 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../Context/UseAuth'
 import logo from './logo.png'
 
 const Navbar = () => {
-    // TODO: gerçek auth sistemi kurulunca bu mock state'in yerini alacak
-    const [user, setUser] = useState<{ userName: string } | null>(null)
-
-    const isLoggedIn = () => user !== null
-
-    const logout = () => {
-        setUser(null)
-    }
+    const { user, isLoggedIn, logout } = useAuth()
 
     return (
         <nav className="relative container mx-auto p-6">
@@ -44,7 +37,7 @@ const Navbar = () => {
                             to="/register"
                             className="px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70"
                         >
-                            Signup
+                            Register
                         </Link>
                     </div>
                 )}
